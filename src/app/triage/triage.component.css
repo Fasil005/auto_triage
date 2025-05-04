@@ -16,7 +16,7 @@
   
   /* Make the card-body of the second card scrollable */
   .card-body {
-    height: 700px;  /* You can adjust this to the required height */
+    height: 750px;  /* You can adjust this to the required height */
     overflow-y: auto; /* Enable vertical scrolling */
   }
   
@@ -31,4 +31,10 @@
     margin-top: -0.5rem;
     margin-bottom: 0.5rem;
     display: block; /* Ensure this is display: block */
+  }
+
+  form.submitted input.ng-invalid,
+  form.submitted textarea.ng-invalid,
+  form.submitted select.ng-invalid {
+    border: 2px solid red;
   }

@@ -5,7 +5,7 @@
           <div class="card-body">
             <h5 class="card-title fw-bold mb-3">WHO Triage Input</h5>
 
-            <form [formGroup]="triageForm">
+            <form [formGroup]="triageForm" [ngClass]="{ 'submitted': submitted }">
                 <div class="form-group mb-3">
                   <input type="text" placeholder="Patient Name" class="form-control mb-2" formControlName="name" />
                   <!-- <div *ngIf="triageForm.get('name')?.errors?.['required'] && triageForm.get('name')?.touched" class="error">
@@ -19,13 +19,22 @@
                 </div>
               
                 <div class="form-group mb-3">
-                  <input type="number" placeholder="Age (in days)" class="form-control mb-2" formControlName="age" />
-                  <!-- <div *ngIf="triageForm.get('age')?.invalid && triageForm.get('age')?.touched" class="error">Age is required</div> -->
+                  <input type="date" class="form-control mb-2" formControlName="age" (change)="onDOBChange()" />
                 </div>
               
                 <div class="form-group mb-3">
-                  <input type="text" placeholder="Gender" class="form-control mb-2" formControlName="gender" />
-                  <!-- <div *ngIf="triageForm.get('gender')?.invalid && triageForm.get('gender')?.touched" class="error">Gender is required</div> -->
+                  <select class="form-control mb-2" formControlName="gender">
+                    <option value="" disabled selected>Select Gender</option>
+                    <option value="M">Male</option>
+                    <option value="F">Female</option>
+                    <option value="O">Others</option>
+                  </select>
+                  <!-- Optional: show error on submit -->
+                  <!--
+                  <div *ngIf="submitted && triageForm.get('gender')?.invalid" class="error">
+                    Gender is required
+                  </div>
+                  -->
                 </div>
               
                 <div class="form-group mb-3">

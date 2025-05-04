@@ -14,6 +14,8 @@ export class TriageComponent implements OnInit {
 
 
   triageForm!: FormGroup;
+  submitted = false;
+  ageInDays: number = 0;
 
   alerts = [
     { patient: 'John Doe', priority: 'High', time: '2 mins ago' },
@@ -45,37 +47,65 @@ export class TriageComponent implements OnInit {
     });
   }
 
-  debugClick() {
-    console.log('Button clicked');
+  onDOBChange() {
+    const age_in_days = this.triageForm.get('age')?.value;
+    if (age_in_days) {
+      const birthDate = new Date(age_in_days);
+      const today = new Date();
+      const diffTime = Math.abs(today.getTime() - birthDate.getTime());
+      this.ageInDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+    }
   }
   
   handleSubmit() {
 
-    console.log('Submit triggered');
-
     if (this.triageForm.valid) {
+      this.submitted = false;
       console.log('Form submitted successfully:', this.triageForm.value);
+
+      const formValue = this.triageForm.value;
+
+      const payload = {
+        patient: {
+          name: formValue.name,
+          uhid: formValue.uhid,
+          age: formValue.age,
+          age_in_days: this.ageInDays,
+          gender: formValue.gender
+        },
+        triage: {
+          heart_rate: formValue.heartRate,
+          respiratory_rate: formValue.respiratoryRate,
+          blood_pressure: formValue.bp,
+          temperature: formValue.temperature,
+          spo2: formValue.spo2,
+          chief_complaint: formValue.complaint
+        }
+      };
+
+      console.log('Formatted Payload:', payload);
   
-      // this.http.post('/api/triage/predict/', this.formData).subscribe(
-      //   (response: any) => {
-      //     console.log('Backend Response:', response);
+      this.http.post('/api/triage/predict/', payload).subscribe(
+        (response: any) => {
+          console.log('Backend Response:', response);
   
-      //     const newAlert = {
-      //       id: Date.now(),
-      //       patient: response.name || this.formData.name,
-      //       priority: response.triageLevel || 'Green',
-      //       time: new Date().toLocaleTimeString(),
-      //     };
+          const newAlert = {
+            id: Date.now(),
+            patient: response.name || formValue.name,
+            priority: response.triageLevel || 'Green',
+            time: new Date().toLocaleTimeString(),
+          };
   
-      //     this.alerts = [newAlert, ...this.alerts];
-      //     this.result = response;
-      //   },
-      //   (error) => {
-      //     console.error('Error occurred during form submission:', error);
-      //     alert('Failed to submit form data. Please try again.');
-      //   }
-      // );
+          this.alerts = [newAlert, ...this.alerts];
+          // this.result = response;
+        },
+        (error) => {
+          console.error('Error occurred during form submission:', error);
+          alert('Failed to submit form data. Please try again.');
+        }
+      );
     } else {
+      this.submitted = true;
       console.log('Form is invalid');
       this.triageForm.markAllAsTouched();
     }
