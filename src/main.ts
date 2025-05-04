@@ -1,6 +1,15 @@
-import { bootstrapApplication } from '@angular/platform-browser';
-import { appConfig } from './app/app.config';
-import { AppComponent } from './app/app.component';
+import { ApplicationConfig } from '@angular/core';
+import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
+import { httpInterceptor } from './app/interceptors/http.interceptor';
 
-bootstrapApplication(AppComponent, appConfig)
-  .catch((err) => console.error(err));
+
+export const appConfig: ApplicationConfig = {
+  providers: [
+    provideHttpClient(
+      withFetch(),
+      withInterceptors([
+        httpInterceptor
+      ]),
+    ),
+  ]
+};
