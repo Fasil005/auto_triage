@@ -11,7 +11,8 @@ import { httpInterceptor } from './interceptors/http.interceptor';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideHttpClient(
-    withInterceptors([httpInterceptor])),
+      withInterceptors([httpInterceptor])
+    ),
     provideRouter(routes),
   ],
 };
