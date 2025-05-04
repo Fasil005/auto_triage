@@ -23,18 +23,18 @@ export const httpInterceptor: HttpInterceptorFn = (
     map((event: HttpEvent<any>) => {
       if (event instanceof HttpResponse) {
         if (event.status === 200) {
-          // ✅ Success modal or alert
-          alert('✅ Success');
+          // Success modal or alert
+          alert('Success');
         } else {
-          // ❓ Unknown success code
-          alert(`⚠️ Received unexpected status: ${event.status}`);
+          // Unknown success code
+          alert(`Received unexpected status: ${event.status}`);
         }
       }
       return event;
     }),
     catchError((error: HttpErrorResponse) => {
-      // ❌ Error modal
-      alert(`❌ Error occurred: ${error.message}`);
+      // Error modal
+      alert(`Error occurred: ${error.message}`);
       return throwError(() => error);
     })
   );

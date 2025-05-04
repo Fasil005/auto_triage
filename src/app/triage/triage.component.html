@@ -5,58 +5,60 @@
           <div class="card-body">
             <h5 class="card-title fw-bold mb-3">WHO Triage Input</h5>
 
-            <form [formGroup]="triageForm" (ngSubmit)="handleSubmit()" novalidate>
+            <form [formGroup]="triageForm" (ngSubmit)="handleSubmit()" novalidate #form="ngForm">
                 <div class="form-group mb-3">
                   <input type="text" placeholder="Patient Name" class="form-control mb-2" formControlName="name" />
-                  <div *ngIf="triageForm.get('name')?.invalid && triageForm.get('name')?.touched" class="error">Name is required</div>
+                  <!-- <div *ngIf="triageForm.get('name')?.errors?.['required'] && triageForm.get('name')?.touched" class="error">
+                    Name is required
+                  </div>                   -->
                 </div>
               
                 <div class="form-group mb-3">
                   <input type="text" placeholder="UHID Number" class="form-control mb-2" formControlName="uhid" />
-                  <div *ngIf="triageForm.get('uhid')?.invalid && triageForm.get('uhid')?.touched" class="error">UHID is required</div>
+                  <!-- <div *ngIf="triageForm.get('uhid')?.invalid && triageForm.get('uhid')?.touched" class="error">UHID is required</div> -->
                 </div>
               
                 <div class="form-group mb-3">
                   <input type="number" placeholder="Age (in days)" class="form-control mb-2" formControlName="age" />
-                  <div *ngIf="triageForm.get('age')?.invalid && triageForm.get('age')?.touched" class="error">Age is required</div>
+                  <!-- <div *ngIf="triageForm.get('age')?.invalid && triageForm.get('age')?.touched" class="error">Age is required</div> -->
                 </div>
               
                 <div class="form-group mb-3">
                   <input type="text" placeholder="Gender" class="form-control mb-2" formControlName="gender" />
-                  <div *ngIf="triageForm.get('gender')?.invalid && triageForm.get('gender')?.touched" class="error">Gender is required</div>
+                  <!-- <div *ngIf="triageForm.get('gender')?.invalid && triageForm.get('gender')?.touched" class="error">Gender is required</div> -->
                 </div>
               
                 <div class="form-group mb-3">
                   <input type="number" placeholder="Heart Rate" class="form-control mb-2" formControlName="heartRate" />
-                  <div *ngIf="triageForm.get('heartRate')?.invalid && triageForm.get('heartRate')?.touched" class="error">Heart Rate is required</div>
+                  <!-- <div *ngIf="triageForm.get('heartRate')?.invalid && triageForm.get('heartRate')?.touched" class="error">Heart Rate is required</div> -->
                 </div>
               
                 <div class="form-group mb-3">
                   <input type="number" placeholder="Respiratory Rate" class="form-control mb-2" formControlName="respiratoryRate" />
-                  <div *ngIf="triageForm.get('respiratoryRate')?.invalid && triageForm.get('respiratoryRate')?.touched" class="error">Respiratory Rate is required</div>
+                  <!-- <div *ngIf="triageForm.get('respiratoryRate')?.invalid && triageForm.get('respiratoryRate')?.touched" class="error">Respiratory Rate is required</div> -->
                 </div>
               
                 <div class="form-group mb-3">
                   <input type="text" placeholder="Blood Pressure (e.g. 120/80)" class="form-control mb-2" formControlName="bp" />
-                  <div *ngIf="triageForm.get('bp')?.invalid && triageForm.get('bp')?.touched" class="error">Blood Pressure is required</div>
+                  <!-- <div *ngIf="triageForm.get('bp')?.invalid && triageForm.get('bp')?.touched" class="error">Blood Pressure is required</div> -->
                 </div>
               
                 <div class="form-group mb-3">
                   <input type="number" placeholder="Temperature (°C)" class="form-control mb-2" formControlName="temperature" />
-                  <div *ngIf="triageForm.get('temperature')?.invalid && triageForm.get('temperature')?.touched" class="error">Temperature is required</div>
+                  <!-- <div *ngIf="triageForm.get('temperature')?.invalid && triageForm.get('temperature')?.touched" class="error">Temperature is required</div> -->
                 </div>
               
                 <div class="form-group mb-3">
                   <input type="number" placeholder="SpO₂ (%)" class="form-control mb-2" formControlName="spo2" />
-                  <div *ngIf="triageForm.get('spo2')?.invalid && triageForm.get('spo2')?.touched" class="error">SpO₂ is required</div>
+                  <!-- <div *ngIf="triageForm.get('spo2')?.invalid && triageForm.get('spo2')?.touched" class="error">SpO₂ is required</div> -->
                 </div>
               
                 <div class="form-group mb-3">
                   <textarea placeholder="Chief Complaint" class="form-control mb-2" formControlName="complaint"></textarea>
-                  <div *ngIf="triageForm.get('complaint')?.invalid && triageForm.get('complaint')?.touched" class="error">Complaint is required</div>
+                  <!-- <div *ngIf="triageForm.get('complaint')?.invalid && triageForm.get('complaint')?.touched" class="error">Complaint is required</div> -->
                 </div>
               
-                <button type="submit"  [disabled]="!triageForm.valid" class="btn btn-primary">Submit</button>
+                <button type="submit" (click)="debugClick()" class="btn btn-primary">Submit</button>
               </form>
               
 

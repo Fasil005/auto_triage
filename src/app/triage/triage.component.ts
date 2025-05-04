@@ -6,7 +6,7 @@ import { FormBuilder, FormGroup, FormsModule, NgForm, ReactiveFormsModule, Valid
 @Component({
   selector: 'app-triage',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, HttpClientModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, HttpClientModule],
   templateUrl: './triage.component.html',
   styleUrl: './triage.component.css'
 })
@@ -32,16 +32,16 @@ export class TriageComponent implements OnInit {
 
   ngOnInit(): void {
     this.triageForm = this.fb.group({
-      name: ['', Validators.required],
-      uhid: ['', Validators.required],
-      age: ['', Validators.required],
-      gender: ['', Validators.required],
-      heartRate: ['', Validators.required],
-      respiratoryRate: ['', Validators.required],
-      bp: ['', Validators.required],
-      temperature: ['', Validators.required],
-      spo2: ['', Validators.required],
-      complaint: ['', Validators.required],
+      name: ['', [Validators.required]],
+      uhid: ['', [Validators.required]],
+      age: [null, [Validators.required]],
+      gender: ['', [Validators.required]],
+      heartRate: [null, [Validators.required]],
+      respiratoryRate: [null, [Validators.required]],
+      bp: ['', [Validators.required]],
+      temperature: [null, [Validators.required]],
+      spo2: [null, [Validators.required]],
+      complaint: ['', [Validators.required]]
     });
   }
 
